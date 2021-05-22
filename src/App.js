@@ -1,24 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as AppRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { defaultRoute, routes } from './routes';
+import { NotFound } from './components/layouts/partials/NotFound';
+import { LayoutDefault } from './components/layouts/LayoutDefault';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppRouter>
+      <Switch>
+        {routes.map((route, index) => (
+          // You can render a <Route> in as many places
+          // as you want in your app. It will render along
+          // with any other <Route>s that also match the URL.
+          // So, a sidebar or breadcrumbs or anything else
+          // that requires you to render multiple things
+          // in multiple places at the same URL is nothing
+          // more than multiple <Route>s.
+          <Route
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            // children={<route.component />}
+            render={(props) => {
+              if (route.layout) {
+                return (
+                  <route.layout {...props}>
+                    <route.component {...props} />
+                  </route.layout>
+                )
+              } else {
+                return (
+                  <LayoutDefault {...props}>
+                    <route.component {...props} />
+                  </LayoutDefault>
+                )
+              }
+            }}
+          />
+        ))}
+
+        {defaultRoute !== '/' && <Redirect from="/" to={defaultRoute} exact={true} />}
+
+        {/* NotFound page */}
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </AppRouter>
   );
 }
 
