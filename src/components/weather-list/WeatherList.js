@@ -1,23 +1,12 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 import { Weather } from '../weather/Weather';
 
-const DEFAULT_CITY = [
-  'Amsterdam',
-  'Dublin,IE',
-  'Edinburgh',
-  'Manchester',
-  'London',
-];
-
-export function WeatherList() {
-  const [cities] = useState(DEFAULT_CITY);
-
+export function WeatherList({ classname, cities, units, onCityClick }) {
   return (
-    <div className="row">
+    <div className={`row ${classname}`}>
       {cities.map((city, index) => (
         <div key={`city-weather-${index}`} className="col-md-4 mb-4">
-          <Weather cityName={city} />
+          <Weather cityName={city} units={units} onClick={onCityClick} />
         </div>
       ))}
     </div>
@@ -25,9 +14,15 @@ export function WeatherList() {
 }
 
 WeatherList.propTypes = {
-
+  className: PropTypes.string,
+  units: PropTypes.string,
+  cities: PropTypes.array.isRequired,
+  onCityClick: PropTypes.func,
 };
 
 WeatherList.defaultProps = {
-
+  className: '',
+  units: 'standard',
+  cities: [],
+  onCityClick: () => {},
 };

@@ -8,10 +8,10 @@ export function Footer() {
           <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink className="nav-link" to="/about">About</NavLink>
+          <NavLink className="nav-link" to="/about">About Me</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="http://efriandika.github.io/backbase-react" target="_blank">Live Demo</a>
+          <a className="nav-link" href="https://efriandika.github.io/backbase-react" target="_blank" rel="noreferrer">Live Demo</a>
         </li>
       </ul>
 
@@ -20,7 +20,7 @@ export function Footer() {
       </div>
 
       <div className="author">
-        <a href="https://www.linkedin.com/in/efriandika/" target="_blank">
+        <a href="https://www.linkedin.com/in/efriandika/" target="_blank"  rel="noreferrer">
           Efriandika Pratama
         </a>
       </div>

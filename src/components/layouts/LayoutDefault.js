@@ -1,5 +1,6 @@
 import { Navbar } from './partials/Navbar';
 import { Footer } from './partials/Footer';
+import { Drawer } from './partials/Drawer';
 
 export function LayoutDefault({ children }) {
   return (
@@ -9,6 +10,7 @@ export function LayoutDefault({ children }) {
           {children}
         </div>
       <Footer />
+      <Drawer />
     </>
   );
 }
