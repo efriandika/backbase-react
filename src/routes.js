@@ -1,8 +1,8 @@
 import loadable from '@loadable/component';
-import { PageLoader } from './components/layouts/page-loader/PageLoader';
+import { PageSkeleton } from './components/layouts/page-skeleton/PageSkeleton';
 
 const lazyLoadOption = {
-  fallback: <PageLoader />,
+  fallback: <PageSkeleton />,
 };
 
 // Lazy Load Import / Dynamic Import
