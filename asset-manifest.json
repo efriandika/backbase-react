@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/backbase-react/static/css/main.a8e5b8d4.chunk.css",
-    "main.js": "/backbase-react/static/js/main.2dbb335d.chunk.js",
-    "main.js.map": "/backbase-react/static/js/main.2dbb335d.chunk.js.map",
+    "main.js": "/backbase-react/static/js/main.4445a373.chunk.js",
+    "main.js.map": "/backbase-react/static/js/main.4445a373.chunk.js.map",
     "runtime-main.js": "/backbase-react/static/js/runtime-main.94e6bac1.js",
     "runtime-main.js.map": "/backbase-react/static/js/runtime-main.94e6bac1.js.map",
     "static/css/2.67636e45.chunk.css": "/backbase-react/static/css/2.67636e45.chunk.css",
@@ -29,6 +29,6 @@
     "static/css/2.67636e45.chunk.css",
     "static/js/2.509992e5.chunk.js",
     "static/css/main.a8e5b8d4.chunk.css",
-    "static/js/main.2dbb335d.chunk.js"
+    "static/js/main.4445a373.chunk.js"
   ]
 }
