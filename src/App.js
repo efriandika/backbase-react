@@ -5,7 +5,7 @@ import { LayoutDefault } from './components/layouts/LayoutDefault';
 
 function App() {
   return (
-    <AppRouter>
+    <AppRouter basename="/backbase-react">
       <Switch>
         {routes.map((route, index) => (
           // You can render a <Route> in as many places
