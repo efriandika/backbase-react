@@ -1,5 +1,5 @@
 import { Navbar } from './partials/Navbar';
-import { Footer } from './partials/footer/Footer';
+import { Footer } from './partials/Footer';
 
 export function LayoutDefault({ children }) {
   return (

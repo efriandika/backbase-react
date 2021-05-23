@@ -6,8 +6,8 @@ const lazyLoadOption = {
 };
 
 // Lazy Load Import / Dynamic Import
-const Dashboard = loadable(() => import('./containers/dashboard/Dashboard'), lazyLoadOption);
-const About = loadable(() => import('./containers/about/About'), lazyLoadOption);
+const Dashboard = loadable(() => import('./pages/dashboard/Dashboard'), lazyLoadOption);
+const About = loadable(() => import('./pages/about/About'), lazyLoadOption);
 
 // Application Routing
 export const defaultRoute = '/dashboard'

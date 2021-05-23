@@ -2,9 +2,9 @@ import { Link, NavLink } from 'react-router-dom';
 
 export function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid">
-        <Link className="navbar-brand text-brand" to="/">{process.env.REACT_APP_NAME}</Link>
+    <nav className="navbar navbar-expand navbar-light navbar-weather">
+      <div className="container">
+        <Link className="navbar-brand text-brand text-primary" to="/">{process.env.REACT_APP_NAME}</Link>
 
         <ul className="navbar-nav">
           <li className="nav-item">
