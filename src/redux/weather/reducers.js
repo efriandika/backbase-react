@@ -2,14 +2,7 @@ import { weatherTypes } from './types';
 import { updateObject } from '../utilities';
 
 export const INITIAL_STATE = {
-  units: 'standard',
-  cities: [
-    'Amsterdam',
-    'Dublin,IE',
-    'Edinburgh',
-    'Manchester',
-    'London',
-  ],
+  units: 'metric',
 };
 
 export const weatherReducer = (state = INITIAL_STATE, action) => {

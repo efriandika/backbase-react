@@ -1,5 +1,13 @@
 import { appTypes } from './types';
 
-export const openDrawer = () => ({ type: appTypes.OPEN_DRAWER });
-export const closeDrawer = () => ({ type: appTypes.CLOSE_DRAWER });
-export const toggleDrawer = () => ({ type: appTypes.TOGGLE_DRAWER });
+export const addCity = (city) => ({
+  type: appTypes.ADD_CITY,
+  payload: { city }
+});
+
+export const openWeatherForecast = (lon, lat, name) => ({
+  type: appTypes.OPEN_WEATHER_FORECAST,
+  payload: { lon, lat, name }
+});
+
+export const closeWeatherForecast = () => ({ type: appTypes.CLOSE_WEATHER_FORECAST });

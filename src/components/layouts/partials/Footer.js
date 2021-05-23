@@ -16,7 +16,7 @@ export function Footer() {
       </ul>
 
       <div className="footer-text">
-        Made with love for Backbase Interview Assignment.
+        Made with <i className="bi bi-heart" role="img" aria-label="Love" /> for Backbase Interview Assignment.
       </div>
 
       <div className="author">

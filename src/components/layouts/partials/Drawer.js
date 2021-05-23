@@ -1,23 +1,35 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { closeDrawer } from '../../../redux/app/actions';
+import { closeWeatherForecast } from '../../../redux/app/actions';
+import { WeatherForecast } from '../../weather-forecast/WeatherForecast';
 
 export function Drawer() {
   const dispatch = useDispatch();
   const drawerIsOpen = useSelector((state) => state.app.drawer);
+  const selectedCity = useSelector((state) => state.app.selectedCity);
+  const units = useSelector((state) => state.weather.selectedCity);
 
-  function handleCloseDrawer() {
-    dispatch(closeDrawer());
+  function closeDrawer() {
+    dispatch(closeWeatherForecast());
   }
 
   return (
     <div className={`drawer ${drawerIsOpen ? 'open' : ''}`}>
-      <div className="drawer-overlay" onClick={handleCloseDrawer} />
+      <div className="drawer-overlay" onClick={closeDrawer} />
       <div className="drawer-content">
-        <button type="button" className="btn-close" onClick={handleCloseDrawer}>
-          <i className="ion ion-ios-close" />
+        <button type="button" className="btn-close" onClick={closeDrawer}>
+          <i className="bi bi-x" />
         </button>
 
-        XXX
+        {selectedCity ? (
+          <WeatherForecast
+            lat={selectedCity.lat}
+            lon={selectedCity.lon}
+            name={selectedCity.name}
+            units={units}
+          />
+        ) : (
+          <div>There is no city selected</div>
+        )}
       </div>
     </div>
   );
