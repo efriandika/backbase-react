@@ -28,7 +28,7 @@ export function Weather({ className, units, cityName, onClick }) {
         },
       });
     } catch (e) {
-      console.error('Failed to get weather data from the server!');
+      // console.error('Failed to get weather data from the server!');
     }
   }
 
