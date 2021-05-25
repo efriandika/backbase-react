@@ -6,6 +6,10 @@ import { useTemperatureUnit } from '../../libs/unit/hooks/useTemperatureUnit';
 import { useSpeedUnit } from '../../libs/unit/hooks/useSpeedUnit';
 import { Skeleton } from '../skeleton/Skeleton';
 
+/**
+ * To show a city weather information
+ * @author efriandika
+ */
 export function Weather({ className, units, cityName, onClick }) {
   const [{ data, loading, error }, fetchData, cancelRequest] = useHttp({}, { manual: true });
   const textTemperatureUnit = useTemperatureUnit();
@@ -64,7 +68,7 @@ export function Weather({ className, units, cityName, onClick }) {
 
   function renderData() {
     return (
-      <div className={`${className} ${styles.container} cursor-pointer`} onClick={() => onClick(data.coord.lon, data.coord.lat, data.name)}>
+      <div className={`${className} ${styles.container} cursor-pointer`} onClick={() => onClick(data.coord.lon, data.coord.lat, data.name)} aria-label={`${data.name}'s weather`}>
         {renderWeatherIcon()}
 
         <div className={styles.temperature}>{textTemperatureUnit(data.main.temp)}</div>
@@ -116,9 +120,25 @@ export function Weather({ className, units, cityName, onClick }) {
 }
 
 Weather.propTypes = {
+  /**
+   * Custom className
+   */
   className: PropTypes.string,
-  units: PropTypes.string,
+
+  /**
+   * Data Unit
+   * @see {@link https://openweathermap.org/current#dat} for more information
+   */
+  units: PropTypes.oneOf(['standard', 'imperial', 'metric']),
+
+  /**
+   * City name
+   */
   cityName: PropTypes.string.isRequired,
+
+  /**
+   * It will be fired When weather box is clicked
+   */
   onClick: PropTypes.func,
 };
 

@@ -6,7 +6,7 @@ import { initializeStore } from './redux/store';
 
 const store = initializeStore();
 
-test('renders app root', () => {
+test('renders app root correctly', () => {
   const { getByText } = render(
     <Provider store={store}>
       <App />
