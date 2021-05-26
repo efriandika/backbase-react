@@ -22,7 +22,7 @@ export function Navbar() {
         <div className="d-flex">
           F&deg;
           <div className="form-check form-switch ms-2">
-            <input name="unit" className="form-check-input" type="checkbox" checked={units === 'metric'} onChange={handleUnitSwitch} />
+            <input name="unit" className="form-check-input" type="checkbox" aria-checked={units === 'metric'} checked={units === 'metric'} onChange={handleUnitSwitch} aria-label="Metric Units Switcher" />
           </div>
           C&deg;
         </div>

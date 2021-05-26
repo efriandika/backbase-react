@@ -3,9 +3,16 @@ import { Weather } from '../weather/Weather';
 import styles from './WeatherList.module.scss';
 import { useState } from 'react';
 
+/**
+ * To show list of city weather information
+ * @author efriandika
+ */
 export function WeatherList({ className, cities, units, onCityClick, onNewCitySubmit }) {
   const [newCityName, setNewCityName] = useState('');
 
+  /**
+   * To handle new city form then fire an event
+   */
   function handleNewCitySubmit(e) {
     e.preventDefault();
     onNewCitySubmit(newCityName);
@@ -33,7 +40,7 @@ export function WeatherList({ className, cities, units, onCityClick, onNewCitySu
             </div>
 
             <div className="text-end">
-              <button type="submit" className="btn btn-primary" disabled={newCityName === ''}>Submit</button>
+              <button type="submit" className="btn btn-primary" disabled={newCityName === ''} aria-label="Add New City Button">Submit</button>
             </div>
           </form>
         </div>
@@ -43,11 +50,31 @@ export function WeatherList({ className, cities, units, onCityClick, onNewCitySu
 }
 
 WeatherList.propTypes = {
+  /**
+   * Custom className
+   */
   className: PropTypes.string,
-  units: PropTypes.string,
+
+  /**
+   * Data Unit
+   * @see {@link https://openweathermap.org/current#dat} for more information
+   */
+  units: PropTypes.oneOf(['standard', 'imperial', 'metric']),
+
+  /**
+   * List of city name
+   */
   cities: PropTypes.array.isRequired,
+
+  /**
+   * It will be fired When an item is clicked
+   */
   onCityClick: PropTypes.func,
-  onCityAdd: PropTypes.func,
+
+  /**
+   * It will be fired When new city form submitted
+   */
+  onNewCitySubmit: PropTypes.func,
 };
 
 WeatherList.defaultProps = {

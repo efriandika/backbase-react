@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore as createStoreFn } from 'redux';
 import { appReducer } from './app/reducers';
 import { weatherReducer } from './weather/reducers';
 
@@ -21,9 +21,9 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware);
 };
 
-const initStore = (preloadedState = {}) => {
+const createStore = (preloadedState = {}) => {
   /* ------------- Assemble Middleware ------------- */
-  store = createStore(
+  store = createStoreFn(
     rootReducers,
     preloadedState,
     bindMiddleware([]),
@@ -33,12 +33,12 @@ const initStore = (preloadedState = {}) => {
 };
 
 export const initializeStore = (preloadedState) => {
-  let currentStore = store ?? initStore(preloadedState);
+  let currentStore = store ?? createStore(preloadedState);
 
   // After navigating to a page with an initial Redux state, merge that state
   // with the current state in the store, and create a new store
   if (preloadedState && store) {
-    currentStore = initStore({
+    currentStore = createStore({
       ...store.getState(),
       ...preloadedState,
     });

@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import styles from './Skeleton.module.scss';
 
+/**
+ * Skeleton Element can be used to make a component skeleton
+ * @author efriandika
+ */
 export function Skeleton({
   count,
   width,
@@ -12,6 +16,7 @@ export function Skeleton({
 }) {
   const elements = [];
 
+  // Render multiple rows of skeleton
   for (let i = 0; i < count; i++) {
     let elementStyle = {};
 
@@ -41,6 +46,7 @@ export function Skeleton({
           ...customStyle,
           ...elementStyle,
         }}
+        data-testid="skeleton-element"
       >
         &zwnj;
       </span>
@@ -48,7 +54,7 @@ export function Skeleton({
   }
 
   return (
-    <span>
+    <span role="status" aria-live="assertive" aria-label="Loading content...">
       {Wrapper
         ? elements.map((element, i) => (
           <Wrapper key={i}>
@@ -62,12 +68,39 @@ export function Skeleton({
 }
 
 Skeleton.propTypes = {
+  /**
+   * Total rows
+   */
   count: PropTypes.number,
+
+  /**
+   * Width of the skeleton element
+   */
   width: PropTypes.any,
+
+  /**
+   * Component to wrap the skeleton element
+   */
   wrapper: PropTypes.any,
+
+  /**
+   * Height of the skeleton element
+   */
   height: PropTypes.any,
+
+  /**
+   * Set element as circle
+   */
   circle: PropTypes.bool,
+
+  /**
+   * Custom additional style
+   */
   style: PropTypes.object,
+
+  /**
+   * Custom additional css class
+   */
   className: PropTypes.string,
 };
 

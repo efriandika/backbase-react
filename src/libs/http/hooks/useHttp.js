@@ -1,6 +1,8 @@
-import { makeUseAxios } from 'axios-hooks'
+import { makeUseAxios } from 'axios-hooks';
 import { http } from '../http';
 
-export const useHttp = makeUseAxios({
+const useHttp = makeUseAxios({
   axios: http
 });
+
+export { useHttp };

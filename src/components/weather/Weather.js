@@ -6,6 +6,10 @@ import { useTemperatureUnit } from '../../libs/unit/hooks/useTemperatureUnit';
 import { useSpeedUnit } from '../../libs/unit/hooks/useSpeedUnit';
 import { Skeleton } from '../skeleton/Skeleton';
 
+/**
+ * To show a city weather information
+ * @author efriandika
+ */
 export function Weather({ className, units, cityName, onClick }) {
   const [{ data, loading, error }, fetchData, cancelRequest] = useHttp({}, { manual: true });
   const textTemperatureUnit = useTemperatureUnit();
@@ -28,13 +32,13 @@ export function Weather({ className, units, cityName, onClick }) {
         },
       });
     } catch (e) {
-      console.error('Failed to get weather data from the server!');
+      // console.error('Failed to get weather data from the server!');
     }
   }
 
   function renderWeatherIcon() {
     if (data.weather.length > 0) {
-      return (<img className={styles.weatherIcon} src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt={data.weather[0].main} />);
+      return (<img className={styles.weatherIcon} src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt={data.weather[0].main} data-testid="weather-icon" />);
     } else {
       return null;
     }
@@ -64,7 +68,7 @@ export function Weather({ className, units, cityName, onClick }) {
 
   function renderData() {
     return (
-      <div className={`${className} ${styles.container} cursor-pointer`} onClick={() => onClick(data.coord.lon, data.coord.lat, data.name)}>
+      <div className={`${className} ${styles.container} cursor-pointer`} onClick={() => onClick(data.coord.lon, data.coord.lat, data.name)} aria-label={`${data.name}'s weather`}>
         {renderWeatherIcon()}
 
         <div className={styles.temperature}>{textTemperatureUnit(data.main.temp)}</div>
@@ -86,24 +90,20 @@ export function Weather({ className, units, cityName, onClick }) {
   }
 
   function renderErrorResponse() {
-    if (error) {
-      return (
-        <div className={`${className} ${styles.container} text-danger`}>
-          Data cannot be loaded from the server.<br />
-          {(error.response.status === 404) ? (
-            <>
-              <strong>{cityName}</strong> is not found
-            </>
-          ) : (
-            <>
-              <strong>Error:</strong> {error.message}
-            </>
-          ) }
-        </div>
-      );
-    } else {
-      return null;
-    }
+    return (
+      <div className={`${className} ${styles.container} text-danger`}>
+        Data cannot be loaded from the server.<br />
+        {(error.response.status === 404) ? (
+          <>
+            <strong>{cityName}</strong> is not found
+          </>
+        ) : (
+          <>
+            <strong>Error:</strong> {error.message}
+          </>
+        ) }
+      </div>
+    );
   }
 
   if (data && !loading && error == null) {
@@ -116,9 +116,25 @@ export function Weather({ className, units, cityName, onClick }) {
 }
 
 Weather.propTypes = {
+  /**
+   * Custom className
+   */
   className: PropTypes.string,
-  units: PropTypes.string,
+
+  /**
+   * Data Unit
+   * @see {@link https://openweathermap.org/current#dat} for more information
+   */
+  units: PropTypes.oneOf(['standard', 'imperial', 'metric']),
+
+  /**
+   * City name
+   */
   cityName: PropTypes.string.isRequired,
+
+  /**
+   * It will be fired When weather box is clicked
+   */
   onClick: PropTypes.func,
 };
 
