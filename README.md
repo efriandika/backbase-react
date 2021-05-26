@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Backbase Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is also available on [Live Demo](https://efriandika.github.io/backbase-react/) that I hosted on my GitHub Pages 
 
-## Available Scripts
+## Architecture
 
-In the project directory, you can run:
+I call this architecture that I use in this project as `Component centric` architecture. What are the advantages?
+* It is loosely coupled and reusable. 
+* Scalable. 
+* It uses lazy load when opening a page. So that, you only load the file you need on that page to reduce load time on the client side.
+* Implement single responsibility principe
 
-### `yarn start`
+All of these are very useful especially when building react app that is always getting larger. It will help us to maintain thousands components easier.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+PS:
+In this sample project. I stored the API KEY at `.env` file (`REACT_APP_BACKEND_API_KEY`) which is not secure. It can be improved by creating proxy backend and store the API key on the backend side so that we don't need API KEY stored on client side anymore
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> I am sure this architecture design is still not perfect yet. 
+> But, I am always open and learning all time to make it great! :D
 
-### `yarn test`
+## Directory Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+project
+│   .editorconfig (to make sure we are using same style on every IDE)
+│   .env
+│   .gitignore
+│   package.json
+│   README.md
+│   
+└───public
+│   │   ...
+│   
+└───src
+│   │   App.js
+│   │   App.test.js
+│   │   index.js
+│   │   routes.js (Router mapping)
+│   │   setupTests.js
+│   │
+│   └───components (Reusable component will goes here)
+│   └───libs (Hooks, application owned js libs: http, etc...)
+│   └───pages (Container component / pages that is routed by react router)
+│   └───redux (All of things about redux: actions, reducers, types)
+│   └───resources
+│       └───styles (Global SCSS File)
+│       └───vendor (Styling file from 3rd party libs that we are going to override / change)
+```
 
-### `yarn build`
+## How to Run?
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+yarn start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Since I use free service of **openweathermap.org**, it has rate limit = 60 request / minutes.
+If you would like to change the api key, it can be configured at `.env` file:
+```
+REACT_APP_NAME="City Weather App"
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+REACT_APP_BACKEND_BASE_URL="https://api.openweathermap.org/data/2.5"
+REACT_APP_BACKEND_API_KEY="d91fa5e792320c4bd3a18bb475e1c7ea"
+```
 
-### `yarn eject`
+## Author
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* [Efriandika Pratama](https://www.linkedin.com/in/efriandika/)
