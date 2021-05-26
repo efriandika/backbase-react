@@ -127,30 +127,10 @@ describe('Test Dashboard Page',  () => {
 
     const elements = await findAllByLabelText(`Amsterdam's weather`);
 
-    // const citiesBeforeUpdated = store.getState().app.cities;
-
     act(() => {
       fireEvent.click(elements[0]);
     });
 
     expect(store.getState().app.drawer).toBe(true);
-  });
-
-  it('should handle new city', async () => {
-    const citiesBeforeUpdated = store.getState().app.cities;
-    const { findByLabelText } = renderComponentMockAPI();
-
-    const button = await findByLabelText('Add New City Button');
-    const input = await findByLabelText('Add New City');
-
-    act(() => {
-      fireEvent.change(input, { target: { value: 'Bali' } });
-    });
-
-    act(() => {
-      fireEvent.click(button);
-    });
-
-    expect(store.getState().app.cities.length).toEqual(citiesBeforeUpdated.length + 1);
   });
 });
