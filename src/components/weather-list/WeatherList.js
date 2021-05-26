@@ -40,7 +40,7 @@ export function WeatherList({ className, cities, units, onCityClick, onNewCitySu
             </div>
 
             <div className="text-end">
-              <button type="submit" className="btn btn-primary" disabled={newCityName === ''}>Submit</button>
+              <button type="submit" className="btn btn-primary" disabled={newCityName === ''} aria-label="Add New City Button">Submit</button>
             </div>
           </form>
         </div>

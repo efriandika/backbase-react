@@ -38,7 +38,7 @@ export function Weather({ className, units, cityName, onClick }) {
 
   function renderWeatherIcon() {
     if (data.weather.length > 0) {
-      return (<img className={styles.weatherIcon} src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt={data.weather[0].main} />);
+      return (<img className={styles.weatherIcon} src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt={data.weather[0].main} data-testid="weather-icon" />);
     } else {
       return null;
     }
@@ -90,24 +90,20 @@ export function Weather({ className, units, cityName, onClick }) {
   }
 
   function renderErrorResponse() {
-    if (error) {
-      return (
-        <div className={`${className} ${styles.container} text-danger`}>
-          Data cannot be loaded from the server.<br />
-          {(error.response.status === 404) ? (
-            <>
-              <strong>{cityName}</strong> is not found
-            </>
-          ) : (
-            <>
-              <strong>Error:</strong> {error.message}
-            </>
-          ) }
-        </div>
-      );
-    } else {
-      return null;
-    }
+    return (
+      <div className={`${className} ${styles.container} text-danger`}>
+        Data cannot be loaded from the server.<br />
+        {(error.response.status === 404) ? (
+          <>
+            <strong>{cityName}</strong> is not found
+          </>
+        ) : (
+          <>
+            <strong>Error:</strong> {error.message}
+          </>
+        ) }
+      </div>
+    );
   }
 
   if (data && !loading && error == null) {

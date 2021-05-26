@@ -1,11 +1,9 @@
-import { render, waitFor } from '@testing-library/react';
 import { Weather } from './Weather';
-import { initializeStore } from '../../redux/store';
-import { Provider } from 'react-redux';
 import MockAdapter from 'axios-mock-adapter';
 import { http } from '../../libs/http/http';
+import { render, waitFor } from '../../libs/test/test-utils';
+import { act, fireEvent } from '@testing-library/react';
 
-const store = initializeStore();
 const mockHttp = new MockAdapter(http);
 
 const mockResponseData = {
@@ -39,11 +37,7 @@ const mockResponseData = {
 function renderComponentMockAPI(httpStatus = 200, responseData = mockResponseData) {
   mockHttp.onAny("/weather").reply(httpStatus, responseData);
 
-  return render(
-    <Provider store={store}>
-      <Weather cityName="Amsterdam" />
-    </Provider>
-  );
+  return render(<Weather cityName="Amsterdam" />);
 }
 
 describe('Test Weather Component', () => {
@@ -52,14 +46,14 @@ describe('Test Weather Component', () => {
   });
 
   it("should render loading skeleton while requesting data to the server", async () => {
-    const { findAllByTestId } = renderComponentMockAPI()
+    const { findAllByTestId } = renderComponentMockAPI();
 
     const skeletonElements = await findAllByTestId('skeleton-element');
     expect(skeletonElements.length).toBeGreaterThanOrEqual(1);
   });
 
   it("should show the weather info from the API", async () => {
-    const { queryByText } = renderComponentMockAPI()
+    const { queryByText } = renderComponentMockAPI();
 
     await waitFor(() => {
       const element = queryByText(/amsterdam/i);
@@ -68,11 +62,44 @@ describe('Test Weather Component', () => {
   });
 
   it("should render error message when city is not found", async () => {
-    const { queryByText } = renderComponentMockAPI(404, null)
+    const { queryByText } = renderComponentMockAPI(404, null);
 
     await waitFor(() => {
       const errorElement = queryByText(/is not found/i);
       expect(errorElement).toBeInTheDocument();
     });
+  });
+
+  it("should render error message when api is error", async () => {
+    const { queryByText } = renderComponentMockAPI(500, null);
+
+    await waitFor(() => {
+      const errorElement = queryByText(/Error/i);
+      expect(errorElement).toBeInTheDocument();
+    });
+  });
+
+  it("should not render weather icon if icon data is unavailable", async () => {
+    const { queryByTestId } = renderComponentMockAPI(200, { ...mockResponseData, weather: [] });
+
+    await waitFor(() => {
+      const element = queryByTestId('weather-icon');
+      expect(element).not.toBeInTheDocument();
+    });
+  });
+
+  it("should handle on click event", async () => {
+    const mockOnClickCallBack = jest.fn();
+
+    mockHttp.onAny("/weather").reply(200, mockResponseData);
+    const { findByLabelText } = render(<Weather cityName="Amsterdam" onClick={mockOnClickCallBack} />);
+
+    const element = await findByLabelText(`Amsterdam's weather`);
+
+    act(() => {
+      fireEvent.click(element);
+    });
+
+    expect(mockOnClickCallBack).toHaveBeenCalled();
   });
 });

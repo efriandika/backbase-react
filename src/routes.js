@@ -1,5 +1,6 @@
 import loadable from '@loadable/component';
 import { PageSkeleton } from './components/layouts/page-skeleton/PageSkeleton';
+import { LayoutDefault } from './components/layouts/LayoutDefault';
 
 const lazyLoadOption = {
   fallback: <PageSkeleton />,
@@ -18,6 +19,7 @@ export const routes = [
   },
   {
     path: '/about',
-    component: () => <About />
+    component: () => <About />,
+    layout: (props) => <LayoutDefault {...props} />,
   },
 ];

@@ -41,7 +41,11 @@ function App() {
         {defaultRoute !== '/' && <Redirect from="/" to={defaultRoute} exact={true} />}
 
         {/* NotFound page */}
-        <Route path="*" component={NotFound} />
+        <Route path="*" component={() => (
+          <LayoutDefault>
+            <NotFound />
+          </LayoutDefault>
+        )} />
       </Switch>
     </AppRouter>
   );

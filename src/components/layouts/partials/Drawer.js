@@ -2,6 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeWeatherForecast } from '../../../redux/app/actions';
 import { WeatherForecast } from '../../weather-forecast/WeatherForecast';
 
+/**
+ * Drawer dialog box
+ * @author efriandika
+ */
 export function Drawer() {
   const dispatch = useDispatch();
   const drawerIsOpen = useSelector((state) => state.app.drawer);
@@ -13,10 +17,10 @@ export function Drawer() {
   }
 
   return (
-    <div className={`drawer ${drawerIsOpen ? 'open' : ''}`}>
+    <div className={`drawer ${drawerIsOpen ? 'open' : ''}`} role="dialog" aria-label="Weather Forecasting">
       <div className="drawer-overlay" onClick={closeDrawer} />
       <div className="drawer-content">
-        <button type="button" className="btn-close" onClick={closeDrawer}>
+        <button type="button" className="btn-close" onClick={closeDrawer} aria-label="close" data-testid="hehe">
           <i className="bi bi-x-circle" />
         </button>
 
